@@ -4,11 +4,12 @@ O que é:
 Protótipo acadêmico local com três telas próprias:
 1. Entrada principal (/)
 2. Cadastro de aluno e mensalidade (/cadastro)
-3. Listagem de alunos e mensalidades (/resultados)
+3. Listagem de alunos e mensalidades (/resultados), com opção de excluir um cadastro demonstrativo após confirmação.
 
 IMPORTANTE:
 - Use apenas dados fictícios.
-- Os registros ficam apenas na memória enquanto o servidor está ligado.
+- Os registros ficam apenas na memória enquanto o servidor está ligado; ao reiniciar a aplicação, voltam aos dados iniciais.
+- A exclusão remove o registro selecionado da lista em memória após uma confirmação. Não existe lixeira de recuperação nem persistência em banco de dados.
 - Este protótipo NÃO é um sistema pronto para uso real, não possui banco de dados,
   autenticação real ou persistência. Não insira dados pessoais verdadeiros.
 - A chave Flask do app.py é apenas para demonstração local.
