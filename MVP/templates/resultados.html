@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Alunos e mensalidades | Gestão de Academia{% endblock %}
+{% block content %}
+<div class="cabecalho-pagina linha-titulo">
+  <div>
+    <p class="sobretitulo">CONSULTA</p>
+    <h1>Alunos e mensalidades</h1>
+    <p class="introducao">Confira o período, o vencimento e a situação registrada.</p>
+  </div>
+  <a class="botao principal" href="{{ url_for('cadastro') }}">＋ Novo cadastro</a>
+</div>
+<div class="resumo">
+  <div><span>Registros exibidos</span><strong>{{ alunos|length }}</strong></div>
+  <div><span>Valor mensal padrão</span><strong>R$ 100,00</strong></div>
+  <div><span>Estado inicial</span><strong>Pendente</strong></div>
+</div>
+<div class="tabela-conteiner">
+  <table>
+    <caption>Lista demonstrativa de alunos e mensalidades</caption>
+    <thead><tr>
+      <th scope="col">Aluno</th><th scope="col">Período</th><th scope="col">Valor</th><th scope="col">Vencimento</th><th scope="col">Situação</th>
+    </tr></thead>
+    <tbody>
+    {% for aluno in alunos %}
+      <tr>
+        <td data-label="Aluno"><strong>{{ aluno.nome }}</strong></td>
+        <td data-label="Período">{{ aluno.periodo }}</td>
+        <td data-label="Valor">R$ {{ "%.2f"|format(aluno.valor)|replace(".", ",") }}</td>
+        <td data-label="Vencimento">{{ aluno.vencimento }}</td>
+        <td data-label="Situação"><span class="estado pendente"><span aria-hidden="true">●</span> {{ aluno.status }}</span></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="nota"><strong>Como interpretar:</strong> “Pendente” indica que o pagamento ainda não foi registrado como realizado. A situação é escrita por extenso e não depende apenas da cor.</div>
+<div class="acoes-formulario">
+  <a class="botao principal" href="{{ url_for('cadastro') }}">Cadastrar outro aluno</a>
+  <a class="botao secundario" href="{{ url_for('inicio') }}">Voltar ao início</a>
+</div>
+{% endblock %}

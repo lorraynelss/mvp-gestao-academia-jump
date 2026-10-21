@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Gestão de Academia{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topo">
+    <div class="marca" aria-label="Academia Jump — Gestão de Academia">
+      <img src="{{ url_for('static', filename='logo-academia.jpeg') }}" alt="Logo Academia Jump" class="marca-logo">
+      <div><strong>Academia Jump</strong><span>Gestão de Academia</span></div>
+    </div>
+    <nav aria-label="Navegação principal">
+      <a href="{{ url_for('inicio') }}">Início</a>
+      <a href="{{ url_for('cadastro') }}">Cadastrar aluno</a>
+      <a href="{{ url_for('resultados') }}">Alunos e mensalidades</a>
+    </nav>
+  </header>
+  <main class="conteudo">
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% if mensagens %}
+        {% for categoria, mensagem in mensagens %}
+          <div class="mensagem {{ categoria }}" role="status">{{ mensagem }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>Protótipo acadêmico • MVP da gestão de academia</footer>
+</body>
+</html>

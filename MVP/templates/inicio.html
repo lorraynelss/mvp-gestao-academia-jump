@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Início | Gestão de Academia{% endblock %}
+{% block content %}
+<section class="boas-vindas">
+  <p class="sobretitulo">PAINEL ADMINISTRATIVO</p>
+  <h1>Controle simples de alunos e mensalidades</h1>
+  <p class="introducao">Organize os cadastros e consulte a situação das mensalidades em um só lugar.</p>
+  <a class="botao principal" href="{{ url_for('cadastro') }}">Cadastrar aluno e mensalidade <span aria-hidden="true">→</span></a>
+</section>
+<section class="cartoes" aria-label="Ações disponíveis">
+  <article class="cartao">
+    <div class="simbolo" aria-hidden="true">＋</div>
+    <h2>Novo cadastro</h2>
+    <p>Registre um aluno e a mensalidade do período de referência.</p>
+    <a class="link-acao" href="{{ url_for('cadastro') }}">Abrir cadastro →</a>
+  </article>
+  <article class="cartao">
+    <div class="simbolo" aria-hidden="true">▤</div>
+    <h2>Consultar registros</h2>
+    <p>Visualize os alunos, os vencimentos e os estados das mensalidades.</p>
+    <a class="link-acao" href="{{ url_for('resultados') }}">Ver listagem →</a>
+  </article>
+</section>
+<div class="nota"><strong>Objetivo do MVP:</strong> substituir anotações dispersas por um registro administrativo simples e organizado.</div>
+{% endblock %}
