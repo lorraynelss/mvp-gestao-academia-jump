@@ -1,4 +1,5 @@
 from datetime import date
+import re
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
@@ -33,6 +34,25 @@ def cadastro():
 
         if not nome or not data_cadastro or not periodo or not vencimento:
             flash("Preencha todos os campos obrigatórios indicados com *.", "erro")
+            return render_template("cadastro.html", valores=request.form)
+
+        if len(nome) > 100 or len(telefone) > 30:
+            flash("Confira os campos: nome deve ter até 100 caracteres e telefone até 30.", "erro")
+            return render_template("cadastro.html", valores=request.form)
+
+        if not re.fullmatch(r"(0[1-9]|1[0-2])/\d{4}", periodo):
+            flash("Informe o período no formato MM/AAAA, por exemplo 11/2026.", "erro")
+            return render_template("cadastro.html", valores=request.form)
+
+        try:
+            data_cadastro_obj = date.fromisoformat(data_cadastro)
+            vencimento_obj = date.fromisoformat(vencimento)
+        except ValueError:
+            flash("Informe datas válidas para o cadastro e o vencimento.", "erro")
+            return render_template("cadastro.html", valores=request.form)
+
+        if vencimento_obj < data_cadastro_obj:
+            flash("A data de vencimento não pode ser anterior à data de cadastro.", "erro")
             return render_template("cadastro.html", valores=request.form)
 
         duplicado = any(
