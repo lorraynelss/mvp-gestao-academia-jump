@@ -94,3 +94,29 @@ footer { text-align: center; padding: 18px; color: var(--cinza); font-size: 12px
   td { border: 0; padding: 7px 0; display: flex; justify-content: space-between; gap: 12px; }
   td::before { content: attr(data-label); font-weight: 700; color: var(--cinza); }
 }
+
+
+/* Ação de exclusão por registro */
+.form-excluir { margin: 0; }
+.botao-excluir {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #b42318;
+  border-radius: 8px;
+  background: #fff;
+  color: #b42318;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.botao-excluir:hover { background: #fff0ed; }
+.botao-excluir:focus-visible { outline: 3px solid #d18b00; outline-offset: 3px; }
+.lista-vazia { padding: 24px; text-align: center; color: var(--cinza); }
+@media (max-width: 700px) {
+  .form-excluir { display: flex; justify-content: flex-end; }
+}
