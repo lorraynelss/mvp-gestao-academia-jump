@@ -41,3 +41,17 @@ COMO CAPTURAR AS EVIDÊNCIAS:
 - Confira se todos os textos estão nítidos antes de inserir na atividade.
 
 Este protótipo não substitui validação com o representante real da Academia Jump.
+
+
+FUNCIONALIDADES DO MVP
+- Tela inicial com navegação para cadastro e consulta.
+- Cadastro demonstrativo com nome, telefone opcional, data de cadastro, período de referência e vencimento.
+- Valor mensal fixo de R$ 100,00 no protótipo.
+- Consulta dos registros demonstrativos de alunos e mensalidades.
+- Exclusão de um registro selecionado mediante confirmação.
+
+ARQUITETURA E LIMITAÇÕES
+A aplicação é um protótipo web em Flask com templates Jinja2 e estilos CSS. Os dados são mantidos em uma lista Python em memória; não há banco de dados, autenticação, controle de acesso ou persistência entre reinicializações. Use somente dados fictícios. A exclusão é definitiva dentro da sessão em execução e não existe mecanismo de recuperação.
+
+VALIDAÇÕES
+O servidor verifica campos obrigatórios, formato do período de referência e consistência básica das datas antes de adicionar um registro. Essas validações demonstrativas não substituem os controles necessários em uma aplicação de produção.
