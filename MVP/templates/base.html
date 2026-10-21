@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <a class="pular-conteudo" href="#conteudo-principal">Pular para o conteúdo principal</a>
   <header class="topo">
     <div class="marca" aria-label="Academia Jump — Gestão de Academia">
       <img src="{{ url_for('static', filename='logo-academia.jpeg') }}" alt="Logo Academia Jump" class="marca-logo">
@@ -18,11 +19,11 @@
       <a href="{{ url_for('resultados') }}">Alunos e mensalidades</a>
     </nav>
   </header>
-  <main class="conteudo">
+  <main class="conteudo" id="conteudo-principal" tabindex="-1">
     {% with mensagens = get_flashed_messages(with_categories=true) %}
       {% if mensagens %}
         {% for categoria, mensagem in mensagens %}
-          <div class="mensagem {{ categoria }}" role="status">{{ mensagem }}</div>
+          <div class="mensagem {{ categoria }}" role="status" aria-live="polite">{{ mensagem }}</div>
         {% endfor %}
       {% endif %}
     {% endwith %}
