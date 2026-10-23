@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Cadastro | Gestão de Academia{% endblock %}
+{% block content %}
+<div class="cabecalho-pagina">
+  <p class="sobretitulo">CADASTRO</p>
+  <h1>Cadastrar aluno e mensalidade</h1>
+  <p class="introducao">Preencha os dados fictícios para demonstrar o fluxo principal do MVP. Os campos com * são obrigatórios.</p>
+</div>
+<form class="formulario" method="post" action="{{ url_for('cadastro') }}">
+  <fieldset>
+    <legend>Dados do aluno</legend>
+    <div class="campo">
+      <label for="nome">Nome do aluno *</label>
+      <input id="nome" name="nome" type="text" required maxlength="100" autocomplete="off"
+             value="{{ valores.get('nome', '') }}" placeholder="Ex.: Ana Souza">
+    </div>
+    <div class="campo">
+      <label for="telefone">Telefone (opcional)</label>
+      <input id="telefone" name="telefone" type="tel" autocomplete="off"
+             value="{{ valores.get('telefone', '') }}" placeholder="Ex.: (51) 90000-0000">
+    </div>
+    <div class="campo">
+      <label for="data_cadastro">Data de cadastro *</label>
+      <input id="data_cadastro" name="data_cadastro" type="date" required
+             value="{{ valores.get('data_cadastro', '2026-10-16') }}">
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Mensalidade</legend>
+    <div class="campo">
+      <label for="periodo">Período de referência *</label>
+      <input id="periodo" name="periodo" type="text" required maxlength="7"
+             value="{{ valores.get('periodo', '10/2026') }}" placeholder="MM/AAAA">
+      <small>Informe o mês e o ano, por exemplo: 10/2026.</small>
+    </div>
+    <div class="campo">
+      <label for="vencimento">Data de vencimento *</label>
+      <input id="vencimento" name="vencimento" type="date" required
+             value="{{ valores.get('vencimento', '2026-10-20') }}">
+    </div>
+    <div class="campo">
+      <label for="valor">Valor da mensalidade</label>
+      <input id="valor" type="text" value="R$ 100,00" readonly aria-describedby="aviso-valor">
+      <small id="aviso-valor">Valor fixo definido para este MVP.</small>
+    </div>
+  </fieldset>
+  <div class="acoes-formulario">
+    <button class="botao principal" type="submit">Salvar cadastro</button>
+    <a class="botao secundario" href="{{ url_for('inicio') }}">Cancelar e voltar</a>
+  </div>
+</form>
+{% endblock %}

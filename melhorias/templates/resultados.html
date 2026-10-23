@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Alunos e mensalidades | Gestão de Academia{% endblock %}
+{% block content %}
+<div class="cabecalho-pagina linha-titulo">
+  <div>
+    <p class="sobretitulo">CONSULTA</p>
+    <h1>Alunos e mensalidades</h1>
+    <p class="introducao">Confira o período, o vencimento e a situação registrada.</p>
+  </div>
+  <a class="botao principal" href="{{ url_for('cadastro') }}">＋ Novo cadastro</a>
+</div>
+<div class="resumo">
+  <div><span>Registros exibidos</span><strong>{{ alunos|length }}</strong></div>
+  <div><span>Valor mensal padrão</span><strong>R$ 100,00</strong></div>
+  <div><span>Estado inicial</span><strong>Pendente</strong></div>
+</div>
+<div class="tabela-conteiner">
+  <table>
+    <caption>Lista demonstrativa de alunos e mensalidades</caption>
+    <thead><tr>
+      <th scope="col">Aluno</th><th scope="col">Período</th><th scope="col">Valor</th><th scope="col">Vencimento</th><th scope="col">Situação</th><th scope="col">Ações</th>
+    </tr></thead>
+    <tbody>
+    {% for aluno in alunos %}
+      <tr>
+        <td data-label="Aluno"><strong>{{ aluno.nome }}</strong></td>
+        <td data-label="Período">{{ aluno.periodo }}</td>
+        <td data-label="Valor">R$ {{ "%.2f"|format(aluno.valor)|replace(".", ",") }}</td>
+        <td data-label="Vencimento">{{ aluno.vencimento }}</td>
+        <td data-label="Situação"><span class="estado pendente"><span aria-hidden="true">●</span> {{ aluno.status }}</span></td>
+        <td data-label="Ações">
+          <form class="form-excluir" method="post" action="{{ url_for('excluir_aluno', aluno_id=aluno.id) }}"
+                onsubmit="return confirm({{ ('Tem certeza de que deseja excluir o cadastro de ' ~ aluno.nome ~ '? Esta ação não pode ser desfeita.')|tojson }});">
+            <button class="botao-excluir" type="submit" aria-label="Excluir cadastro de {{ aluno.nome }}" title="Excluir cadastro">
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6M14 11v6"></path><path d="M9 6V4h6v2"></path>
+              </svg>
+              Excluir
+            </button>
+          </form>
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6" class="lista-vazia">Nenhum aluno cadastrado. Use “Novo cadastro” para adicionar um registro fictício.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="nota"><strong>Como interpretar:</strong> “Pendente” indica que o pagamento ainda não foi registrado como realizado. A situação é escrita por extenso e não depende apenas da cor.</div>
+<div class="acoes-formulario">
+  <a class="botao principal" href="{{ url_for('cadastro') }}">Cadastrar outro aluno</a>
+  <a class="botao secundario" href="{{ url_for('inicio') }}">Voltar ao início</a>
+</div>
+{% endblock %}
