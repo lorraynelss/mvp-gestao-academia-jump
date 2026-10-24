@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: finalmvp
+        working-directory: melhorias
 
     steps:
       - name: Baixar o código
