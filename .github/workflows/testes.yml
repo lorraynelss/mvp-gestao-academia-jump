@@ -10,9 +10,9 @@ on:
 jobs:
   testes:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: melhorias
+       steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
 
     steps:
       - name: Baixar o código
