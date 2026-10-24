@@ -1,4 +1,3 @@
-
 name: Testes automatizados
 
 on:
@@ -10,9 +9,6 @@ on:
 jobs:
   testes:
     runs-on: ubuntu-latest
-       steps:
-      - name: Baixar o código
-        uses: actions/checkout@v4
 
     steps:
       - name: Baixar o código
