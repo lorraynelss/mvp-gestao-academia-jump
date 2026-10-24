@@ -1,3 +1,4 @@
+
 name: Testes automatizados
 
 on:
@@ -20,10 +21,12 @@ jobs:
           python-version: "3.12"
 
       - name: Instalar dependências
+        working-directory: melhorias
         run: |
           python -m pip install --upgrade pip
-          pip install -r MVP/requirements.txt
+          pip install -r requirements.txt
           pip install pytest-cov
 
       - name: Executar testes
-        run: python -m pytest MVP/ --cov=MVP/app --cov-report=term-missing
+        working-directory: melhorias
+        run: python -m pytest --cov=app --cov-report=term-missing
