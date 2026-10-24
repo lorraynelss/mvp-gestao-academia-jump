@@ -3,6 +3,7 @@ import os
 import re
 from flask import Flask, render_template, request, redirect, url_for, flash
 
+
 app = Flask(__name__)
 # Em ambiente local, usa uma chave de demonstração. Defina FLASK_SECRET_KEY
 # por variável de ambiente fora dos testes e nunca reutilize a chave de exemplo.
@@ -25,6 +26,16 @@ alunos = [
     }
 ]
 
+@app.template_filter("data_br")
+def data_br(valor):
+    """Converte a data para o padrão brasileiro."""
+    from datetime import date
+
+    try:
+        return date.fromisoformat(valor).strftime("%d/%m/%Y")
+    except (ValueError, TypeError):
+        return valor
+    
 @app.route("/")
 def inicio():
     return render_template("inicio.html")
