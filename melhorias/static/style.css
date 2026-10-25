@@ -78,6 +78,15 @@ th { background: #eef4f6; color: var(--azul-escuro); font-size: 13px; }
 td { font-size: 14px; }
 .estado { display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; padding: 6px 10px; font-size: 13px; font-weight: 800; white-space: nowrap; }
 .pendente { color: #684900; background: var(--amarelo); border: 1px solid #d7b65d; }
+.estado.atrasada {
+  color: #a32121;
+  background-color: #fde8e8;
+}
+
+.estado.paga {
+  color: #176b3a;
+  background-color: #e5f5eb;
+}
 footer { text-align: center; padding: 18px; color: var(--cinza); font-size: 12px; border-top: 1px solid var(--borda); background: white; }
 @media (max-width: 700px) {
   .topo { align-items: flex-start; flex-direction: column; padding: 16px 20px; gap: 12px; }

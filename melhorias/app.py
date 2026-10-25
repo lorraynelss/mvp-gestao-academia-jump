@@ -53,9 +53,18 @@ def cadastro():
             flash("Preencha todos os campos obrigatórios indicados com *.", "erro")
             return render_template("cadastro.html", valores=request.form)
 
-        if len(nome) > 100 or len(telefone) > 30:
-            flash("Confira os campos: nome deve ter até 100 caracteres e telefone até 30.", "erro")
+        
+
+        if telefone and not re.fullmatch(
+            r"(?:\([0-9]{2}\) ?9[0-9]{8}|[0-9]{11})",
+            telefone
+        ):
+            flash(
+                "Informe o telefone com DDD e 9 dígitos. Ex.: (21)9XXXXXXXX ou 219XXXXXX.",
+                "erro"
+            )
             return render_template("cadastro.html", valores=request.form)
+
 
         if not re.fullmatch(r"(0[1-9]|1[0-2])/\d{4}", periodo):
             flash("Informe o período no formato MM/AAAA, por exemplo 11/2026.", "erro")
@@ -99,6 +108,28 @@ def cadastro():
 
 @app.route("/resultados")
 def resultados():
+    hoje = date.today()
+
+    for aluno in alunos:
+        if aluno.get("status") == "Paga":
+            continue
+
+        try:
+            vencimento = date.fromisoformat(aluno["vencimento"])
+        except (ValueError, TypeError):
+            try:
+                from datetime import datetime
+                vencimento = datetime.strptime(
+                    aluno["vencimento"], "%d/%m/%Y"
+                ).date()
+            except (ValueError, TypeError):
+                aluno["status"] = "Pendente"
+                continue
+
+        aluno["status"] = (
+            "Atrasada" if vencimento < hoje else "Pendente"
+        )
+
     return render_template("resultados.html", alunos=alunos)
 
 @app.route("/aluno/<int:aluno_id>/excluir", methods=["POST"])

@@ -27,7 +27,21 @@
         <td data-label="Período">{{ aluno.periodo }}</td>
         <td data-label="Valor">R$ {{ "%.2f"|format(aluno.valor)|replace(".", ",") }}</td>
         <td data-label="Vencimento">{{ aluno.vencimento|data_br }}</td>
-        <td data-label="Situação"><span class="estado pendente"><span aria-hidden="true">●</span> {{ aluno.status }}</span></td>
+        <td data-label="Situação">
+  {% if aluno.status == "Atrasada" %}
+    <span class="estado atrasada">
+      <span aria-hidden="true">●</span> Atrasada
+    </span>
+  {% elif aluno.status == "Paga" %}
+    <span class="estado paga">
+      <span aria-hidden="true">●</span> Paga
+    </span>
+  {% else %}
+    <span class="estado pendente">
+      <span aria-hidden="true">●</span> Pendente
+    </span>
+  {% endif %}
+</td>
         <td data-label="Ações">
           <form class="form-excluir"
       method="post"
