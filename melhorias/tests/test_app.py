@@ -9,7 +9,7 @@ def client():
     modulo.alunos.append({
         "id": 1,
         "nome": "Ana Souza",
-        "telefone": "(51) 90000-0000",
+        "telefone": "(51) 900000001",
         "data_cadastro": "2026-10-16",
         "periodo": "10/2026",
         "vencimento": "2026-10-20",
